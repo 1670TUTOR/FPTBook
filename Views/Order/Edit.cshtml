@@ -1,0 +1,141 @@
+@model FPTBook.Models.Order
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "_StoreOwnerLayout";
+}
+
+<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+    <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+        <ul class="nav menu">
+            <li class=""><a href="/Books/Index"><em class="fa fa-dashboard">&nbsp;</em> Manage Book</a></li>
+
+            <li class=""><a href="/Authors/Index"><em class="fa fa-dashboard">&nbsp;</em> Manage Author</a></li>
+
+            <li class=""><a href="/Publishers/Index"><em class="fa fa-dashboard">&nbsp;</em> Manage Publishsher</a></li>
+
+            <li class="active"><a href="/Order/Index"><em class="fa fa-dashboard">&nbsp;</em> Manage Order</a></li>
+
+            <li class=""><a href="/Categories/RequestCategory"><em class="fa fa-dashboard">&nbsp;</em>Request
+                    Category</a>
+            </li>
+            <br><br><br><br><br><br><br><br>
+
+            <li class="nav-item">
+                <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout"
+                    asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    <button id="logout" type="submit" class="nnav-link text-dark">Logout</button>
+                </form>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+    <h2>Edit State</h2>
+    <hr />
+    <div>
+    <h4>Order</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.OrderTime)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.OrderTime)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Total)
+        </dt>
+        <dd class = "col-sm-10">
+            $@Html.DisplayFor(model => model.Total)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.State)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.State)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Fullname)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Fullname)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.UserID)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.UserID)
+        </dd>
+    </dl>
+</div>
+    <hr>
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group" hidden>
+                    <label asp-for="OrderTime" class="control-label"></label>
+                    <input asp-for="OrderTime" class="form-control" />
+                    <span asp-validation-for="OrderTime" class="text-danger"></span>
+                </div>
+                <div class="form-group" hidden>
+                    <label asp-for="Total" class="control-label"></label>
+                    <input asp-for="Total" class="form-control" />
+                    <span asp-validation-for="Total" class="text-danger"></span>
+                </div> 
+                <div class="form-group" hidden>
+                    <label asp-for="UserID" class="control-label"></label>
+                    <input asp-for="UserID" class="form-control" />
+                    <span asp-validation-for="UserID" class="text-danger"></span>
+                </div>
+                <div class="form-group" hidden>
+                    <label asp-for="UserID" class="control-label"></label>
+                    <input asp-for="UserID" class="form-control" />
+                    <span asp-validation-for="UserID" class="text-danger"></span>
+                </div>
+                 <div class="form-group" hidden>
+                    <label asp-for="Fullname" class="control-label"></label>
+                    <input asp-for="Fullname" class="form-control" />
+                    <span asp-validation-for="Fullname" class="text-danger"></span>
+                </div>
+                <div class="form-group" hidden>
+                    <label asp-for="Address" class="control-label"></label>
+                    <input asp-for="Address" class="form-control" />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+                <div class="form-group" hidden>
+                    <label asp-for="Phone" class="control-label"></label>
+                    <input asp-for="Phone" class="form-control" />
+                    <span asp-validation-for="Phone" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    
+                    <input class="btn btn-primary" type="submit" asp-for="State" name="State" id="State" value="Delivering"></input> |
+                    <input class="btn btn-success" type="submit" asp-for="State" name="State" id="State" value="Delivered"></input> |
+                    <input class="btn btn-danger" type="submit" asp-for="State" name="State" id="State" value="Canceled"></input> 
+                    @* <input type="submit" value="Save" class="btn btn-primary" /> *@
+                    <hr>
+                    <a asp-action="Index"type="button" class="btn btn-warning" >Back to List</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section Scripts {
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

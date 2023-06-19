@@ -1,0 +1,63 @@
+@using Microsoft.AspNetCore.Identity
+@using FPTBook.Areas.Identity.Data
+
+@inject SignInManager<BookUser> SignInManager
+@inject UserManager<BookUser> UserManager
+@using FPTBook.Models;
+@model List<FPTBook.Models.UserRolesViewModel>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_AdminLayout";
+}
+<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+    <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+        <ul class="nav menu">
+            <li class="active"><a href="/UserRoles/Index"><em class="fa fa-dashboard">&nbsp;</em> Manage User</a></li>
+
+            <li class=""><a href="/RoleManager/Index"><em class="fa fa-dashboard">&nbsp;</em> Add Role</a></li>
+
+            <li class=""><a href="/Categories/Index"><em class="fa fa-dashboard">&nbsp;</em> Manage Category</a></li> 
+
+            <li class=""><a href="/Admin/ReportDemo"><em class="fa fa-dashboard">&nbsp;</em> Report</a></li>
+            <br><br><br><br><br><br><br><br>
+
+            <li class="nav-item">
+									<form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout"
+									asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+										<button id="logout" type="submit" class="nnav-link text-dark">Logout</button>
+									</form>
+								</li>
+        </ul>
+    </div>
+</nav>
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+<h1>User Roles</h1>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Date of Birth</th>
+            <th>Home Address</th>
+            <th>Email</th>
+            <th>Roles</th>
+            <th style="text-align: center">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+        <tr>
+            <td>@user.Name</td>
+            <td>@user.DOB</td>
+            <td>@user.Address</td>
+            <td>@user.Email</td>
+            <td>@string.Join(" , ", user.Roles.ToList())</td>
+            <td style="text-align: center">
+                <a class="btn btn-primary" asp-controller="UserRoles" asp-action="Manage" asp-route-userId="@user.UserId">Manage Roles</a>
+                @* <a class="btn btn-primary" asp-controller="UserRoles" asp-action="Manage" asp-route-userId="@user.UserId">Remove</a> *@
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+</div>
