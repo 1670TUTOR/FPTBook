@@ -22,5 +22,29 @@ namespace FPTBook.Controllers;
 
 public class HomeController : Controller
 {
-    
+    private readonly FPTBookIdentityDbContext _context;
+    private readonly UserManager<BookUser> _userManager;
+
+    public HomeController(FPTBookIdentityDbContext context, UserManager<BookUser> userManager)
+    {
+        _context = context;
+        _userManager = userManager;
+    }
+
+    public async Task<IActionResult> Index(string searchString)
+    {
+        // var fPTBookContext = _context.Book.Include(b => b.Category);
+        // return View(await fPTBookContext.ToListAsync());
+        var fPTBookContext = from m in _context.Book.Include(a => a.Category)
+                                                    .Include(b => b.Author)
+                                                    .Include(c => c.Publisher)
+                             select m;
+
+        if (!String.IsNullOrEmpty(searchString))
+        {
+            fPTBookContext = fPTBookContext.Where(s => s.Title!.Contains(searchString));
+        }
+
+        return View(await fPTBookContext.ToListAsync());
+    }
 }
