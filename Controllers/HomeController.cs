@@ -67,4 +67,23 @@ public class HomeController : Controller
 
         return View(book);
     }
+
+     public IActionResult Help()
+    {
+        return View();
+    }
+    public IActionResult About()
+    {
+        return View();
+    }
+    public IActionResult Login()
+    {
+        return View();
+    }
+    public IActionResult Register()
+    {
+        return View();
+    }
+
+    
 }
