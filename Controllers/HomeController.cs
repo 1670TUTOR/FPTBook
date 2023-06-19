@@ -85,5 +85,44 @@ public class HomeController : Controller
         return View();
     }
 
-    
+     [Authorize(Roles = "Customer, StoreOwner, Admin")]
+    public async Task<IActionResult> PlaceOrderAsync(decimal total, string fullname, string address, string phone, string cusid, int quantity)
+    {
+        ShoppingCart cart = (ShoppingCart)HttpContext.Session.GetObject<ShoppingCart>("cart");
+        Order myOrder = new Order();
+        myOrder.OrderTime = DateTime.Now;
+        myOrder.Total = total;
+        myOrder.Fullname = fullname;
+        myOrder.Address = address;
+        myOrder.Phone = phone;        
+        myOrder.UserID = cusid;
+        myOrder.Quantity = quantity;
+        myOrder.State = "Delivering";
+
+        _context.Order.Add(myOrder);
+        _context.SaveChanges();//this generates the Id for Order
+
+        foreach (var item in cart.Items)
+        {
+            var bookDb = _context.Book.Find(item.ID);
+            bookDb.Quantity = bookDb.Quantity - item.Quantity;
+            if(bookDb.Quantity < 0){
+                return View("ErrorQuantity");
+            }
+            else{
+            _context.Update(bookDb);
+            OrderItem myOrderItem = new OrderItem();
+            myOrderItem.BookID = item.ID;
+            myOrderItem.Quantity = item.Quantity;
+            myOrderItem.OrderID = myOrder.Id;//id of saved order above
+            _context.OrderItem.Add(myOrderItem);
+            }
+        }
+        _context.SaveChanges();
+
+        //empty shopping cart
+        cart = new ShoppingCart();
+        HttpContext.Session.SetObject("cart", cart);
+        return View();
+    }
 }
