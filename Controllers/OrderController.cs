@@ -47,5 +47,27 @@ namespace FPTBook.Controllers
 
             return View(order);
         }
+
+        // GET: Order/Create
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: Order/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Id,OrderTime,Total,State,CustomerID,Fullname,Address,Phone")] Order order)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(order);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(order);
+        }
     }
 }
