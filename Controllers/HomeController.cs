@@ -125,4 +125,41 @@ public class HomeController : Controller
         HttpContext.Session.SetObject("cart", cart);
         return View();
     }
+
+    [HttpPost]
+    public RedirectToActionResult EditOrder(int id, int quantity)
+    {
+        ShoppingCart cart = (ShoppingCart)HttpContext.Session.GetObject<ShoppingCart>("cart");
+        cart.EditItem(id, quantity);
+        HttpContext.Session.SetObject("cart", cart);
+
+        return RedirectToAction("CheckOut", "Home");
+    }
+    [HttpPost]
+    public RedirectToActionResult RemoveOrderItem(int id)
+    {
+        ShoppingCart cart = (ShoppingCart)HttpContext.Session.GetObject<ShoppingCart>("cart");
+        cart.RemoveItem(id);
+        HttpContext.Session.SetObject("cart", cart);
+
+        return RedirectToAction("CheckOut", "Home");
+    }
+
+    [Authorize(Roles = "Customer, StoreOwner, Admin")]
+    public async Task<IActionResult> Record()
+    {
+        var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        return _context.Order != null ?
+                    View(await _context.Order
+                    .Where(o => o.UserID == userID)
+                    .ToListAsync()) :
+                    Problem("Entity set 'FPTBookContext.Order'  is null.");
+    }
+    [Authorize(Roles = "Customer, StoreOwner, Admin")]
+    public async Task<IActionResult> OrderDetail(int id)
+    {
+        var fPTBookContext = _context.OrderItem.Where(e => e.Order.Id == id).Include(b => b.Book).Include(o => o.Order).Include(c => c.Book.Author);
+        return View(await fPTBookContext.ToListAsync());
+    }
 }

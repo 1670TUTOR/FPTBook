@@ -11475,11 +11475,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\git\\abc\\FPTBOOK\\FPTbook\\FPTBook.csproj",
+      "projectUniqueName": "d:\\git\\abc\\1670TUTOR\\FPTBook.csproj",
       "projectName": "FPTBook",
-      "projectPath": "D:\\git\\abc\\FPTBOOK\\FPTbook\\FPTBook.csproj",
+      "projectPath": "d:\\git\\abc\\1670TUTOR\\FPTBook.csproj",
       "packagesPath": "C:\\Users\\QK\\.nuget\\packages\\",
-      "outputPath": "D:\\git\\abc\\FPTBOOK\\FPTbook\\obj\\",
+      "outputPath": "d:\\git\\abc\\1670TUTOR\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\QK\\AppData\\Roaming\\NuGet\\NuGet.Config",
