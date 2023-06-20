@@ -69,5 +69,14 @@ namespace FPTBook.Controllers
             }
             return View(order);
         }
+
+        private bool OrderExists(int id)
+        {
+          return (_context.Order?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+        public async Task<IActionResult> OrderDetail(int id){
+            var fPTBookContext = _context.OrderItem.Where(e => e.Order.Id == id).Include(b => b.Book).Include(o => o.Order).Include(c => c.Book.Author);
+            return View(await fPTBookContext.ToListAsync());
+        }
     }
 }
