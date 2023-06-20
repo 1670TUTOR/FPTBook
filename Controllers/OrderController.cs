@@ -29,5 +29,23 @@ namespace FPTBook.Controllers
                           View(await _context.Order.ToListAsync()) :
                           Problem("Entity set 'FPTBookContext.Order'  is null.");
         }
+
+        // GET: Order/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null || _context.Order == null)
+            {
+                return NotFound();
+            }
+
+            var order = await _context.Order
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            return View(order);
+        }
     }
 }
