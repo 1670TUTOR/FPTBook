@@ -121,6 +121,24 @@ namespace FPTBook.Controllers
             return View(order);
         }
 
+         // GET: Order/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null || _context.Order == null)
+            {
+                return NotFound();
+            }
+
+            var order = await _context.Order
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            return View(order);
+        }
+        
         private bool OrderExists(int id)
         {
           return (_context.Order?.Any(e => e.Id == id)).GetValueOrDefault();
