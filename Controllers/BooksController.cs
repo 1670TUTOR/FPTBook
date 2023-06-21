@@ -66,7 +66,64 @@ namespace FPTBook.Controllers
             return View(book);
         }
 
-        
+        // GET: Books/Create
+        public IActionResult Create()
+        {
+            ViewData["AuthorID"] = new SelectList(_context.Author, "Id", "Name");
+            ViewData["CategoryID"] = new SelectList(_context.Category.Where(m => m.Status == "Approve"), "Id", "Name");
+            ViewData["PublisherID"] = new SelectList(_context.Publisher, "Id", "Name");
+            return View();
+        }
+
+        // POST: Books/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Id,Title,Description,AuthorID,PublisherID,Poster,CategoryID,Quantity,ReleaseDate,Price")] Book book, IFormFile myfile, string Title)
+        {
+            if (ModelState.IsValid)
+            {
+                if(myfile.Length > 0){
+                    string filename = Path.GetFileName(myfile.FileName);
+                    string fileType = Path.GetExtension(myfile.FileName).ToLower().Trim();
+                    if(fileType != ".jpg" && fileType != ".png"){
+                        TempData["Mess"] = "File format not supported. Ony file JPG and PNG";
+                        ViewData["AuthorID"] = new SelectList(_context.Author, "Id", "Name", book.AuthorID);
+                        ViewData["CategoryID"] = new SelectList(_context.Category.Where(m => m.Status == "Approve"), "Id", "Name", book.CategoryID);
+                        ViewData["PublisherID"] = new SelectList(_context.Publisher, "Id", "Name", book.PublisherID);
+                        return View(book);
+                    }
+                    
+                    int compare = DateTime.Compare(book.ReleaseDate, DateTime.Today);
+                    if(compare > 0){
+                        TempData["MessDate"] = "Can't choose a future date";
+                        ViewData["AuthorID"] = new SelectList(_context.Author, "Id", "Name", book.AuthorID);
+                        ViewData["CategoryID"] = new SelectList(_context.Category.Where(m => m.Status == "Approve"), "Id", "Name", book.CategoryID);
+                        ViewData["PublisherID"] = new SelectList(_context.Publisher, "Id", "Name", book.PublisherID);
+                        return View(book);
+                    }
+                    var filePath = Path.Combine(hostEnvironment.WebRootPath, "uploads");
+                    string fullPath = filePath + "\\" + filename;
+                    using (var stream = new FileStream(fullPath, FileMode.Create))
+                    {
+                        await myfile.CopyToAsync(stream);
+                    }
+                    book.Poster = filename;
+                    _context.Add(book);
+                    if(_context.Book.Where(a => a.Title == Title).ToList().Count != 0){
+                        return View(book);
+                    }
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }  
+            }
+            ViewData["AuthorID"] = new SelectList(_context.Author, "Id", "Name", book.AuthorID);
+            ViewData["CategoryID"] = new SelectList(_context.Category.Where(m => m.Status == "Approve"), "Id", "Name", book.CategoryID);
+            ViewData["PublisherID"] = new SelectList(_context.Publisher, "Id", "Name", book.PublisherID);
+            return View(book);
+        }
+
 
     }
 }
