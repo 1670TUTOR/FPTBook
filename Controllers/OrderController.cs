@@ -70,6 +70,24 @@ namespace FPTBook.Controllers
             return View(order);
         }
 
+        // GET: Order/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null || _context.Order == null)
+            {
+                return NotFound();
+            }
+
+            var order = await _context.Order.FindAsync(id);
+            if (order == null)
+            {
+                return NotFound();
+            }
+            return View(order);
+        }
+
+        
+
         private bool OrderExists(int id)
         {
           return (_context.Order?.Any(e => e.Id == id)).GetValueOrDefault();
