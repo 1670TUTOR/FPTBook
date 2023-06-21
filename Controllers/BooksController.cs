@@ -17,6 +17,34 @@ namespace FPTBook.Controllers
     [Authorize(Roles = "StoreOwner, Admin")]
     public class BooksController : Controller
     {
-        
+         private readonly FPTBookIdentityDbContext _context;
+
+        private readonly IWebHostEnvironment hostEnvironment;
+
+        public BooksController(FPTBookIdentityDbContext context, IWebHostEnvironment environment)
+        {
+            _context = context;
+            hostEnvironment = environment;
+        }
+
+        // GET: Books
+        public async Task<IActionResult> Index(string searchString)
+        {
+            // var fPTBookContext = _context.Book.Include(b => b.Author).Include(b => b.Category).Include(b => b.Publisher);
+            // return View(await fPTBookContext.ToListAsync());
+            var fPTBookContext = from m in _context.Book.Include(a => a.Category)
+                                                    .Include(b => b.Author)
+                                                    .Include(c => c.Publisher)
+                                                    select m;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                fPTBookContext = fPTBookContext.Where(s => s.Title!.Contains(searchString));
+            }
+
+            return View(await fPTBookContext.ToListAsync());
+        }
+
+
     }
 }
