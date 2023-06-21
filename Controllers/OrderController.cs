@@ -138,7 +138,26 @@ namespace FPTBook.Controllers
 
             return View(order);
         }
-        
+
+        // POST: Order/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            if (_context.Order == null)
+            {
+                return Problem("Entity set 'FPTBookContext.Order'  is null.");
+            }
+            var order = await _context.Order.FindAsync(id);
+            if (order != null)
+            {
+                _context.Order.Remove(order);
+            }
+            
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
         private bool OrderExists(int id)
         {
           return (_context.Order?.Any(e => e.Id == id)).GetValueOrDefault();
