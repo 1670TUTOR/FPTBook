@@ -17,5 +17,8 @@ namespace FPTBook.Controllers;
 [Authorize(Roles = "Admin")]
 public class AdminController : Controller
 {
+     private readonly FPTBookIdentityDbContext _context;
+    private readonly IWebHostEnvironment hostEnvironment;
 
+   
 }
