@@ -45,6 +45,28 @@ namespace FPTBook.Controllers
             return View(await fPTBookContext.ToListAsync());
         }
 
+         // GET: Books/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null || _context.Book == null)
+            {
+                return NotFound();
+            }
+
+            var book = await _context.Book
+                .Include(b => b.Author)
+                .Include(b => b.Category)
+                .Include(b => b.Publisher)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (book == null)
+            {
+                return NotFound();
+            }
+
+            return View(book);
+        }
+
+        
 
     }
 }
