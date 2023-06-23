@@ -1,39 +1,27 @@
 {
   "format": 1,
   "restore": {
-<<<<<<< HEAD
-    "C:\\Users\\Hai Loi\\Documents\\GitHub\\FPTBook\\FPTBook.csproj": {}
+    "c:\\Users\\DELL\\Documents\\FPTBook\\FPTBook.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Hai Loi\\Documents\\GitHub\\FPTBook\\FPTBook.csproj": {
+    "c:\\Users\\DELL\\Documents\\FPTBook\\FPTBook.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Hai Loi\\Documents\\GitHub\\FPTBook\\FPTBook.csproj",
+        "projectUniqueName": "c:\\Users\\DELL\\Documents\\FPTBook\\FPTBook.csproj",
         "projectName": "FPTBook",
-        "projectPath": "C:\\Users\\Hai Loi\\Documents\\GitHub\\FPTBook\\FPTBook.csproj",
-        "packagesPath": "C:\\Users\\Hai Loi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Hai Loi\\Documents\\GitHub\\FPTBook\\obj\\",
-=======
-    "d:\\git\\abc\\1670TUTOR\\FPTBook.csproj": {}
-  },
-  "projects": {
-    "d:\\git\\abc\\1670TUTOR\\FPTBook.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "d:\\git\\abc\\1670TUTOR\\FPTBook.csproj",
-        "projectName": "FPTBook",
-        "projectPath": "d:\\git\\abc\\1670TUTOR\\FPTBook.csproj",
-        "packagesPath": "C:\\Users\\QK\\.nuget\\packages\\",
-        "outputPath": "d:\\git\\abc\\1670TUTOR\\obj\\",
->>>>>>> ff4f60b3f5a99204da66cbebe3ac2a0af8c3bdad
+        "projectPath": "c:\\Users\\DELL\\Documents\\FPTBook\\FPTBook.csproj",
+        "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
+        "outputPath": "c:\\Users\\DELL\\Documents\\FPTBook\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Hai Loi\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
