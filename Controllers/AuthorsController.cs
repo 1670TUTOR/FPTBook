@@ -12,5 +12,23 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace FPTBook.Controllers
 {
-   
+   [Authorize(Roles = "StoreOwner, Admin")]
+    public class AuthorsController : Controller
+    {
+        private readonly FPTBookIdentityDbContext _context;
+
+        public AuthorsController(FPTBookIdentityDbContext context)
+        {
+            _context = context;
+        }
+
+        // GET: Authors
+        public async Task<IActionResult> Index()
+        {
+              return _context.Author != null ? 
+                          View(await _context.Author.ToListAsync()) :
+                          Problem("Entity set 'FPTBookContext.Author'  is null.");
+        }
+        
+    }
 }
