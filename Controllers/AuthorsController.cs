@@ -29,7 +29,26 @@ namespace FPTBook.Controllers
                           View(await _context.Author.ToListAsync()) :
                           Problem("Entity set 'FPTBookContext.Author'  is null.");
         }
+<<<<<<< HEAD
         
-        
+=======
+        // GET: Authors/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null || _context.Author == null)
+            {
+                return NotFound();
+            }
+
+            var author = await _context.Author
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (author == null)
+            {
+                return NotFound();
+            }
+
+            return View(author);
+        }
+>>>>>>> parent of 24e94cf (Add action Create in AuthorsController)
     }
 }
