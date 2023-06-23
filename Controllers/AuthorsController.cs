@@ -29,6 +29,9 @@ namespace FPTBook.Controllers
                           View(await _context.Author.ToListAsync()) :
                           Problem("Entity set 'FPTBookContext.Author'  is null.");
         }
+<<<<<<< HEAD
+        
+=======
         // GET: Authors/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -46,29 +49,6 @@ namespace FPTBook.Controllers
 
             return View(author);
         }
-        // GET: Authors/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Authors/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description")] Author author,string Name)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(author);
-                if(_context.Author.Where(a => a.Name == Name).ToList().Count != 0){
-                     return View(author);
-                }
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(author);
-        }
+>>>>>>> parent of 24e94cf (Add action Create in AuthorsController)
     }
 }
