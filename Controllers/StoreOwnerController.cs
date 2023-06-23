@@ -9,5 +9,15 @@ namespace FPTBook.Controllers;
 [Authorize(Roles = "StoreOwner, Admin")]
 public class StoreOwnerController : Controller
 {
-    
+    private readonly ILogger<StoreOwnerController> _logger;
+
+    public StoreOwnerController(ILogger<StoreOwnerController> logger)
+    {
+        _logger = logger;
+    }
+
+    public IActionResult Index()
+    {
+        return View();
+    }
 }
