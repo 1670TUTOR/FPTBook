@@ -11475,11 +11475,19 @@
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "C:\\Users\\Hai Loi\\Documents\\GitHub\\FPTBook\\FPTBook.csproj",
       "projectName": "FPTBook",
       "projectPath": "C:\\Users\\Hai Loi\\Documents\\GitHub\\FPTBook\\FPTBook.csproj",
       "packagesPath": "C:\\Users\\Hai Loi\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Hai Loi\\Documents\\GitHub\\FPTBook\\obj\\",
+=======
+      "projectUniqueName": "d:\\git\\abc\\1670TUTOR\\FPTBook.csproj",
+      "projectName": "FPTBook",
+      "projectPath": "d:\\git\\abc\\1670TUTOR\\FPTBook.csproj",
+      "packagesPath": "C:\\Users\\QK\\.nuget\\packages\\",
+      "outputPath": "d:\\git\\abc\\1670TUTOR\\obj\\",
+>>>>>>> ff4f60b3f5a99204da66cbebe3ac2a0af8c3bdad
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Hai Loi\\AppData\\Roaming\\NuGet\\NuGet.Config"

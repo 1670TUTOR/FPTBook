@@ -1,8 +1,14 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "HWFKy42hVVeJg8TsqE78S5obPTyA5lFGOpcI5cMZkugTJ+wmlbQu8kmMA1zdSkTLE0iF9gkPt17P0dNx3HUP1A==",
   "success": true,
   "projectFilePath": "C:\\Users\\Hai Loi\\Documents\\GitHub\\FPTBook\\FPTBook.csproj",
+=======
+  "dgSpecHash": "EHXOW4Yx78bkTNSvEsWrD77398isPndd6Isy5wNe0yAa2I1h/vIAuHvG/G0ddTfeQAJQ8AV6Nrj6UtZfZ20blw==",
+  "success": true,
+  "projectFilePath": "d:\\git\\abc\\1670TUTOR\\FPTBook.csproj",
+>>>>>>> ff4f60b3f5a99204da66cbebe3ac2a0af8c3bdad
   "expectedPackageFiles": [
     "C:\\Users\\Hai Loi\\.nuget\\packages\\epplus.core\\1.5.4\\epplus.core.1.5.4.nupkg.sha512",
     "C:\\Users\\Hai Loi\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
