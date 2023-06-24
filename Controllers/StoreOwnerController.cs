@@ -20,4 +20,8 @@ public class StoreOwnerController : Controller
     {
         return View();
     }
+    public IActionResult ManageBook()
+    {
+        return View();
+    }
 }
