@@ -15,6 +15,19 @@ namespace FPTBook.Controllers
      [Authorize(Roles = "StoreOwner, Admin")]
     public class PublishersController : Controller
     {
-        
+        private readonly FPTBookIdentityDbContext _context;
+
+        public PublishersController(FPTBookIdentityDbContext context)
+        {
+            _context = context;
+        }
+
+        // GET: Publishers
+        public async Task<IActionResult> Index()
+        {
+              return _context.Publisher != null ? 
+                          View(await _context.Publisher.ToListAsync()) :
+                          Problem("Entity set 'FPTBookContext.Publisher'  is null.");
+        }
     }
 }
