@@ -14,6 +14,45 @@ namespace FPTBook.Controllers
 {
     public class CategoriesController : Controller
     {
-       
+        private readonly FPTBookIdentityDbContext _context;
+
+        public CategoriesController(FPTBookIdentityDbContext context)
+        {
+            _context = context;
+        }
+
+        // GET: Categories
+        [Authorize(Roles = "StoreOwner, Admin")]
+        public async Task<IActionResult> Index()
+        {
+              return _context.Category != null ? 
+                          View(await _context.Category.ToListAsync()) :
+                          Problem("Entity set 'FPTBookContext.Category'  is null.");
+        }
+
+        [Authorize(Roles = "StoreOwner, Admin")]
+        public async Task<IActionResult> RequestCategory()
+        {
+              return View(await _context.Category.ToListAsync());
+        }
+
+        // GET: Categories/Details/5
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null || _context.Category == null)
+            {
+                return NotFound();
+            }
+
+            var category = await _context.Category
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (category == null)
+            {
+                return NotFound();
+            }
+
+            return View(category);
+        }
     }
 }
