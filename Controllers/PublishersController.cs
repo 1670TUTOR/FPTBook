@@ -123,5 +123,47 @@ namespace FPTBook.Controllers
             }
             return View(publisher);
         }
+
+         // GET: Publishers/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null || _context.Publisher == null)
+            {
+                return NotFound();
+            }
+
+            var publisher = await _context.Publisher
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (publisher == null)
+            {
+                return NotFound();
+            }
+
+            return View(publisher);
+        }
+
+        // POST: Publishers/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            if (_context.Publisher == null)
+            {
+                return Problem("Entity set 'FPTBookContext.Publisher'  is null.");
+            }
+            var publisher = await _context.Publisher.FindAsync(id);
+            if (publisher != null)
+            {
+                _context.Publisher.Remove(publisher);
+            }
+            
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool PublisherExists(int id)
+        {
+          return (_context.Publisher?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
     }
 }
