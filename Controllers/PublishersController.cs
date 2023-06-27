@@ -72,5 +72,56 @@ namespace FPTBook.Controllers
             }
             return View(publisher);
         }
+
+        // GET: Publishers/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null || _context.Publisher == null)
+            {
+                return NotFound();
+            }
+
+            var publisher = await _context.Publisher.FindAsync(id);
+            if (publisher == null)
+            {
+                return NotFound();
+            }
+            return View(publisher);
+        }
+
+        // POST: Publishers/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description")] Publisher publisher)
+        {
+            if (id != publisher.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(publisher);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!PublisherExists(publisher.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(publisher);
+        }
     }
 }
